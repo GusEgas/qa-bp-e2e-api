@@ -49,6 +49,7 @@ RESULTADOS VERIFICADOS (2026-10-28, Windows 11, Node 24.13.0, Cypress 16.2.0)
 - npm run test:e2e  : PASS (1/1)
 - npm run test:api  : PASS (1/1; 6/6 códigos HTTP esperados, incluido 404)
 - npm test          : PASS (2/2, "All specs passed!")
+- GitHub Actions    : PASS (2/2, workflow qa.yml en ubuntu-latest)
 - Detalle, hallazgos y limitaciones: conclusiones.txt
 
 SOLUCIÓN DE PROBLEMAS

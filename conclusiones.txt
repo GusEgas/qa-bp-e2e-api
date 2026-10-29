@@ -27,6 +27,8 @@ RESULTADOS DE EJECUCIÓN (REALES)
 | npm run test:api  | PASS      | 1/1, 21:25-21:29, prueba 4 s (235 s total)      |
 | npm test (final)  | PASS      | 2/2 "All specs passed!", 21:38-21:41, 163 s     |
 |                   |           | (E2E 7 s, API 2 s; código de salida 0)          |
+| GitHub Actions    | PASS      | 2/2 "All specs passed!" en ubuntu-latest,       |
+|                   |           | 21:56 (run 40809249113, artifact evidencias-qa-bp)|
 
 Total: 2 de 2 pruebas automatizadas aprobadas (100 %), 0 fallidas, 0 bloqueadas,
 tanto por separado como en ejecución conjunta. Una ejecución conjunta previa
