@@ -1,0 +1,82 @@
+Inicio: 2026-10-28T21:25:09
+
+> qa-bp-e2e-api@1.0.0 test:e2e
+> cypress run --spec cypress/e2e/compra-saucedemo.cy.js
+
+
+
+====================================================================================================
+
+  (Run Starting)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Cypress:        16.2.0                                                                         │
+  │ Browser:        Electron 146 (headless) (deprecated)                                           │
+  │ Node Version:   v24.13.0 (C:\Program Files\nodejs\node.exe)                                    │
+  │ Specs:          1 found (compra-saucedemo.cy.js)                                               │
+  │ Searched:       C:\Users\guskl\Desktop\Entrega_QA_BP_E2E_API\qa-bp-e2e-api\cypress\e2e\compra- │
+  │                 saucedemo.cy.js                                                                │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+Warning: The Electron browser is deprecated as a test browser and will be removed in a future version of Cypress.
+
+Switch to Chrome or another installed browser to avoid a breaking change when you upgrade.
+
+Read more about supported browsers: https://on.cypress.io/launching-browsers
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  compra-saucedemo.cy.js                                                          (1 of 1)
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="15.529" tests="1" failures="0">
+  <testsuite name="Root Suite" timestamp="2026-10-29T02:28:45" tests="0" file="cypress\e2e\compra-saucedemo.cy.js" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="E2E | SauceDemo | Flujo de compra" timestamp="2026-10-29T02:28:45" tests="1" time="15.525" failures="0">
+    <testcase name="E2E | SauceDemo | Flujo de compra completa una compra con dos artículos y verifica la confirmación" time="15.248" classname="completa una compra con dos artículos y verifica la confirmación">
+    </testcase>
+  </testsuite>
+</testsuites>
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        1                                                                                │
+  │ Passing:      1                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  3                                                                                │
+  │ Video:        true                                                                             │
+  │ Duration:     15 seconds                                                                       │
+  │ Spec Ran:     compra-saucedemo.cy.js                                                           │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+  (Screenshots)
+
+  -  C:\Users\guskl\Desktop\Entrega_QA_BP_E2E_API\qa-bp-e2e-api\cypress\screenshots\c     (1000x880)
+     ompra-saucedemo.cy.js\01-carrito-con-dos-productos.png                                         
+  -  C:\Users\guskl\Desktop\Entrega_QA_BP_E2E_API\qa-bp-e2e-api\cypress\screenshots\c    (1000x1150)
+     ompra-saucedemo.cy.js\02-resumen-previo-a-confirmacion.png                                     
+  -  C:\Users\guskl\Desktop\Entrega_QA_BP_E2E_API\qa-bp-e2e-api\cypress\screenshots\c     (1000x680)
+     ompra-saucedemo.cy.js\03-confirmacion-compra.png                                               
+
+
+  (Video)
+
+  -  Video output: C:\Users\guskl\Desktop\Entrega_QA_BP_E2E_API\qa-bp-e2e-api\cypress\videos\compra-saucedemo.cy.js.mp4
+
+
+====================================================================================================
+
+  (Run Finished)
+
+
+       Spec                                              Tests  Passing  Failing  Pending  Skipped  
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ √  compra-saucedemo.cy.js                   00:15        1        1        -        -        - │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+    √  All specs passed!                        00:15        1        1        -        -        -  
+
+Fin: 2026-10-28T21:29:07  EXIT=0  segundos=238

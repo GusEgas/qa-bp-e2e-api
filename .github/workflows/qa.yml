@@ -1,0 +1,34 @@
+name: QA E2E y API - ejecución manual
+
+on:
+  workflow_dispatch:
+
+jobs:
+  pruebas:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Instalar dependencias
+        run: npm install --no-audit --no-fund
+      - name: Validar estructura y sintaxis
+        run: npm run check
+      - name: Ejecutar pruebas E2E y API
+        run: npm test
+      - name: Guardar reportes y evidencias
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: evidencias-qa-bp
+          path: |
+            reports/junit/
+            reports/api-evidencias.json
+            cypress/screenshots/
+            cypress/videos/
+          if-no-files-found: warn
+          retention-days: 14

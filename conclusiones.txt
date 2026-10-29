@@ -1,0 +1,122 @@
+EVALUACIÓN QA BP — HALLAZGOS Y CONCLUSIONES
+=========================================
+
+REPOSITORIO PÚBLICO (única URL de entrega, contiene E2E y API)
+https://github.com/GusEgas/qa-bp-e2e-api
+
+ALCANCE IMPLEMENTADO
+1. E2E / opción 2 (SauceDemo): login standard_user, carrito con dos productos,
+   validación de ambos artículos y subtotal, formulario de compra, finalización
+   y verificación de mensaje THANK YOU FOR YOUR ORDER.
+2. API / opción 3 (Swagger Petstore v2): POST usuario, GET usuario, PUT nombre
+   y correo, GET actualizado, DELETE usuario y GET 404 posterior a eliminación.
+3. Captura automática de entradas/salidas API (contraseña enmascarada),
+   capturas y video E2E, reporte JUnit XML, logs de consola y workflow manual
+   de GitHub Actions.
+
+ENTORNO DE EJECUCIÓN
+- Fecha: 2026-10-28 (hora local, Ecuador UTC-5).
+- Windows 11 Pro 10.0.26300, Node.js v24.13.0, npm 11.6.2, Git 2.56.0.
+- Cypress 16.2.0, navegador Electron 146 (headless).
+
+RESULTADOS DE EJECUCIÓN (REALES)
+| Comando           | Resultado | Detalle                                         |
+|-------------------|-----------|-------------------------------------------------|
+| npm run check     | PASS      | Sintaxis y estructura correctas                 |
+| npm run test:e2e  | PASS      | 1/1, 21:25-21:29, prueba 15 s (238 s total)     |
+| npm run test:api  | PASS      | 1/1, 21:25-21:29, prueba 4 s (235 s total)      |
+| npm test (final)  | PASS      | 2/2 "All specs passed!", 21:38-21:41, 163 s     |
+|                   |           | (E2E 7 s, API 2 s; código de salida 0)          |
+
+Total: 2 de 2 pruebas automatizadas aprobadas (100 %), 0 fallidas, 0 bloqueadas,
+tanto por separado como en ejecución conjunta. Una ejecución conjunta previa
+(21:29-21:33) también aprobó 2/2.
+
+Correspondencia de evidencias: reports/junit/, reports/api-evidencias.json,
+cypress/screenshots/, cypress/videos/ y reports/logs/test-all.log provienen de
+la ejecución final de npm test con el código entregado. test-e2e.log y
+test-api.log documentan las ejecuciones individuales (incluyen su JUnit).
+
+Detalle E2E (SauceDemo), todo verificado por aserciones:
+- Login correcto: redirección a /inventory.html.
+- Dos artículos distintos agregados: Sauce Labs Backpack y Sauce Labs Bike Light;
+  badge del carrito = 2.
+- Carrito: 2 filas con ambos nombres; subtotal calculado = suma de precios.
+- Checkout: nombre, apellido y código postal; el subtotal del resumen coincide.
+- Confirmación: /checkout-complete.html con el texto THANK YOU FOR YOUR ORDER
+  (ver hallazgo A7); el carrito queda vacío.
+- Precios capturados: Backpack $29.99 + Bike Light $9.99 = subtotal $39.98.
+
+Detalle API (https://petstore.swagger.io/v2), usuario único por ejecución:
+| Caso                              | Operación                 | HTTP |
+|-----------------------------------|---------------------------|------|
+| 1. Crear usuario                  | POST /user                | 200  |
+| 2. Buscar usuario creado          | GET /user/{username}      | 200  |
+| 3. Actualizar nombre y correo     | PUT /user/{username}      | 200  |
+| 4. Buscar usuario actualizado     | GET /user/{username}      | 200  |
+| 5. Eliminar usuario               | DELETE /user/{username}   | 200  |
+| 6. Verificar eliminación (extra)  | GET /user/{username}      | 404  |
+En el caso 4 se verificó firstName = "Actualizado" y el correo nuevo.
+6 de 6 operaciones devolvieron el código esperado.
+
+EVIDENCIAS
+- reports/junit/resultado-*.xml        Resultado JUnit por spec.
+- reports/api-evidencias.json          Solicitudes y respuestas reales.
+- reports/logs/*.log                   Salida de consola con fecha, código de salida y duración.
+- cypress/screenshots/compra-saucedemo.cy.js/
+    01-carrito-con-dos-productos.png
+    02-resumen-previo-a-confirmacion.png
+    03-confirmacion-compra.png
+- cypress/videos/compra-saucedemo.cy.js.mp4 y usuarios-petstore.cy.js.mp4
+
+HALLAZGOS
+A) OBSERVACIONES VERIFICADAS (reproducidas y con evidencia)
+1. Proyecto: Cypress 16 eliminó Cypress.env(). La primera ejecución falló en el
+   login con "Cypress.env() was removed in Cypress version 16.0.0". Corregido:
+   la configuración usa el bloque "expose" y Cypress.expose(). Tras la
+   corrección ambas suites aprueban.
+2. Entorno: en la terminal integrada de VS Code la variable
+   ELECTRON_RUN_AS_NODE=1 impide arrancar Cypress ("bad option: --smoke-test").
+   Se resuelve eliminándola de la sesión (readme.txt, Solución de problemas).
+3. Petstore: GET /user/{username} incluye el campo password en la respuesta y
+   su valor es idéntico, en texto plano, a la contraseña enviada en el POST
+   (verificado con un usuario sintético que luego se eliminó; en
+   reports/api-evidencias.json el valor aparece como [REDACTED]).
+4. Petstore: POST, GET, PUT y DELETE de /user responden 200 sin enviar ninguna
+   credencial, token ni API key.
+5. Petstore (contrato): POST y PUT devuelven {code, type:"unknown", message}
+   en lugar del recurso; el id llega como texto en "message". GET de un
+   username inexistente devuelve 404 {"message":"User not found"}.
+6. Herramienta: Cypress muestra el navegador por defecto como
+   "Electron 146 (headless) (deprecated)". Alternativa: npm run test:chrome.
+7. SauceDemo: la página de confirmación muestra actualmente
+   "Thank you for your order!" (mayúsculas y minúsculas), mientras que el
+   enunciado lo cita como THANK YOU FOR YOUR ORDER. La aserción normaliza a
+   mayúsculas y verifica que contiene THANK YOU FOR YOUR ORDER; el texto real
+   se aprecia en 03-confirmacion-compra.png.
+
+B) POSIBLES VULNERABILIDADES (riesgo si este comportamiento existiera en un
+   sistema real; Petstore es una demo pública y no se explotaron)
+1. Exposición de datos sensibles (OWASP API3): devolver la contraseña en texto
+   plano indica que se almacena sin hash y que cualquiera que consulte el
+   usuario puede obtenerla (deriva de la observación A3).
+2. Control de acceso ausente (OWASP API1/API5): al no exigir identidad, un
+   cliente que conozca un username podría modificarlo o eliminarlo (deriva de
+   A4). No se probó sobre usuarios ajenos; solo sobre los usuarios sintéticos
+   creados por la prueba.
+3. Enumeración de usuarios: la diferencia 200/404 en GET /user/{username}
+   permite comprobar qué usernames existen (deriva de A5).
+
+LIMITACIONES
+- SauceDemo y Petstore son demos públicas y compartidas: su disponibilidad y
+  sus datos no están bajo control del proyecto.
+- El arranque de Cypress en este equipo tarda unos 3-4 minutos; la ejecución
+  de las pruebas en sí tarda menos de 20 segundos.
+- Se probó funcionalidad; no se evaluó carga, accesibilidad ni seguridad.
+
+RECOMENDACIONES
+1. Ejecutar en CI (workflow .github/workflows/qa.yml) y conservar los artifacts.
+2. En un entorno real, no exponer password en respuestas y exigir autenticación
+   en PUT/DELETE.
+3. Mantener los usernames únicos por ejecución y la limpieza (DELETE) para
+   evitar datos residuales en la API compartida.

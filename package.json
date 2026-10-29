@@ -1,0 +1,21 @@
+{
+  "name": "qa-bp-e2e-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Evaluación QA Banco Pichincha: compra E2E SauceDemo y CRUD API Swagger Petstore",
+  "scripts": {
+    "check": "node --check cypress.config.js && node --check cypress/e2e/compra-saucedemo.cy.js && node --check cypress/e2e/usuarios-petstore.cy.js && node scripts/validar-proyecto.mjs",
+    "test": "cypress run",
+    "test:e2e": "cypress run --spec cypress/e2e/compra-saucedemo.cy.js",
+    "test:api": "cypress run --spec cypress/e2e/usuarios-petstore.cy.js",
+    "test:open": "cypress open",
+    "test:chrome": "cypress run --browser chrome"
+  },
+  "devDependencies": {
+    "cypress": "16.2.0",
+    "mocha-junit-reporter": "^2.2.1"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="2.104" tests="1" failures="0">
+  <testsuite name="Root Suite" timestamp="2026-10-29T02:41:26" tests="0" file="cypress\e2e\usuarios-petstore.cy.js" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="API | Swagger Petstore v2 | CRUD de usuarios" timestamp="2026-10-29T02:41:26" tests="1" time="2.096" failures="0">
+    <testcase name="API | Swagger Petstore v2 | CRUD de usuarios ejecuta los cinco casos requeridos y captura entradas y salidas" time="2.014" classname="ejecuta los cinco casos requeridos y captura entradas y salidas">
+    </testcase>
+  </testsuite>
+</testsuites>

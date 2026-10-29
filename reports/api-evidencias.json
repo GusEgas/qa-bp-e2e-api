@@ -1,0 +1,138 @@
+{
+  "ejercicio": "Opción 3: CRUD usuarios Swagger Petstore v2",
+  "endpointBase": "https://petstore.swagger.io/v2",
+  "generadoEn": "2026-10-29T02:41:26.492Z",
+  "username": "qa_bp_1793241686492_15325",
+  "casos": [
+    {
+      "caso": "1. Crear usuario",
+      "solicitud": {
+        "metodo": "POST",
+        "url": "https://petstore.swagger.io/v2/user",
+        "cuerpo": {
+          "id": 1793241686492,
+          "username": "qa_bp_1793241686492_15325",
+          "firstName": "Prueba",
+          "lastName": "Automatizada",
+          "email": "qa_bp_1793241686492_15325@example.test",
+          "password": "[REDACTED]",
+          "phone": "0000000000",
+          "userStatus": 1
+        }
+      },
+      "respuesta": {
+        "codigoHttp": 200,
+        "cuerpo": {
+          "code": 200,
+          "type": "unknown",
+          "message": "1793241686492"
+        },
+        "duracionMs": 714
+      }
+    },
+    {
+      "caso": "2. Buscar usuario creado",
+      "solicitud": {
+        "metodo": "GET",
+        "url": "https://petstore.swagger.io/v2/user/qa_bp_1793241686492_15325",
+        "cuerpo": null
+      },
+      "respuesta": {
+        "codigoHttp": 200,
+        "cuerpo": {
+          "id": 1793241686492,
+          "username": "qa_bp_1793241686492_15325",
+          "firstName": "Prueba",
+          "lastName": "Automatizada",
+          "email": "qa_bp_1793241686492_15325@example.test",
+          "password": "[REDACTED]",
+          "phone": "0000000000",
+          "userStatus": 1
+        },
+        "duracionMs": 97
+      }
+    },
+    {
+      "caso": "3. Actualizar nombre y correo",
+      "solicitud": {
+        "metodo": "PUT",
+        "url": "https://petstore.swagger.io/v2/user/qa_bp_1793241686492_15325",
+        "cuerpo": {
+          "id": 1793241686492,
+          "username": "qa_bp_1793241686492_15325",
+          "firstName": "Actualizado",
+          "lastName": "Automatizada",
+          "email": "qa_bp_1793241686492_15325.nuevo@example.test",
+          "password": "[REDACTED]",
+          "phone": "0000000000",
+          "userStatus": 1
+        }
+      },
+      "respuesta": {
+        "codigoHttp": 200,
+        "cuerpo": {
+          "code": 200,
+          "type": "unknown",
+          "message": "1793241686492"
+        },
+        "duracionMs": 100
+      }
+    },
+    {
+      "caso": "4. Buscar usuario actualizado",
+      "solicitud": {
+        "metodo": "GET",
+        "url": "https://petstore.swagger.io/v2/user/qa_bp_1793241686492_15325",
+        "cuerpo": null
+      },
+      "respuesta": {
+        "codigoHttp": 200,
+        "cuerpo": {
+          "id": 1793241686492,
+          "username": "qa_bp_1793241686492_15325",
+          "firstName": "Actualizado",
+          "lastName": "Automatizada",
+          "email": "qa_bp_1793241686492_15325.nuevo@example.test",
+          "password": "[REDACTED]",
+          "phone": "0000000000",
+          "userStatus": 1
+        },
+        "duracionMs": 99
+      }
+    },
+    {
+      "caso": "5. Eliminar usuario",
+      "solicitud": {
+        "metodo": "DELETE",
+        "url": "https://petstore.swagger.io/v2/user/qa_bp_1793241686492_15325",
+        "cuerpo": null
+      },
+      "respuesta": {
+        "codigoHttp": 200,
+        "cuerpo": {
+          "code": 200,
+          "type": "unknown",
+          "message": "qa_bp_1793241686492_15325"
+        },
+        "duracionMs": 99
+      }
+    },
+    {
+      "caso": "6. Verificar eliminación (adicional)",
+      "solicitud": {
+        "metodo": "GET",
+        "url": "https://petstore.swagger.io/v2/user/qa_bp_1793241686492_15325",
+        "cuerpo": null
+      },
+      "respuesta": {
+        "codigoHttp": 404,
+        "cuerpo": {
+          "code": 1,
+          "type": "error",
+          "message": "User not found"
+        },
+        "duracionMs": 103
+      }
+    }
+  ]
+}

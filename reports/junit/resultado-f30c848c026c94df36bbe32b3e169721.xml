@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="7.789" tests="1" failures="0">
+  <testsuite name="Root Suite" timestamp="2026-10-29T02:41:11" tests="0" file="cypress\e2e\compra-saucedemo.cy.js" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="E2E | SauceDemo | Flujo de compra" timestamp="2026-10-29T02:41:11" tests="1" time="7.777" failures="0">
+    <testcase name="E2E | SauceDemo | Flujo de compra completa una compra con dos artículos y verifica la confirmación" time="7.653" classname="completa una compra con dos artículos y verifica la confirmación">
+    </testcase>
+  </testsuite>
+</testsuites>
