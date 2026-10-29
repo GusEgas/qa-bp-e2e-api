@@ -99,9 +99,11 @@ A) OBSERVACIONES VERIFICADAS (reproducidas y con evidencia)
 
 B) POSIBLES VULNERABILIDADES (riesgo si este comportamiento existiera en un
    sistema real; Petstore es una demo pública y no se explotaron)
-1. Exposición de datos sensibles (OWASP API3): devolver la contraseña en texto
-   plano indica que se almacena sin hash y que cualquiera que consulte el
-   usuario puede obtenerla (deriva de la observación A3).
+1. Exposición de datos sensibles (OWASP API3): la respuesta HTTP expone la
+   contraseña en texto plano, por lo que cualquiera que consulte el usuario
+   puede obtenerla (deriva de la observación A3). La respuesta no permite
+   determinar cómo se almacena internamente la contraseña; eso requeriría
+   acceso al servidor o a su documentación.
 2. Control de acceso ausente (OWASP API1/API5): al no exigir identidad, un
    cliente que conozca un username podría modificarlo o eliminarlo (deriva de
    A4). No se probó sobre usuarios ajenos; solo sobre los usuarios sintéticos
